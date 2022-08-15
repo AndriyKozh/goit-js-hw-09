@@ -49,6 +49,10 @@ const options = {
           clearInterval(timerId);
         }
       }, 1000);
+      if (timerId) {
+        refs.inputEl.setAttribute('disabled', true);
+        refs.button.setAttribute('disabled', true);
+      }
     });
   },
 };
