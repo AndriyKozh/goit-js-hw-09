@@ -5,10 +5,6 @@ const refs = {
   formEl: document.querySelector('form'),
   input: document.querySelector('input'),
 };
-let delayMs = 0;
-let stepMs = 0;
-let amountEl = 0;
-let promiseMs = delayMs;
 
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
@@ -24,7 +20,14 @@ function createPromise(position, delay) {
   });
 }
 
-refs.formEl.addEventListener('submit', ev => {
+let delayMs = 0;
+let stepMs = 0;
+let amountEl = 0;
+let promiseMs = delayMs;
+
+refs.formEl.addEventListener('submit', onPromisFn);
+
+function onPromisFn(ev) {
   ev.preventDefault();
   const {
     elements: { delay, step, amount },
@@ -40,12 +43,10 @@ refs.formEl.addEventListener('submit', ev => {
 
     createPromise(turnPos, promiseMs)
       .then(res => {
-        console.log(res);
         Notiflix.Notify.success(res);
       })
       .catch(error => {
-        console.log(error);
         Notiflix.Notify.failure(error);
       });
   }
-});
+}
