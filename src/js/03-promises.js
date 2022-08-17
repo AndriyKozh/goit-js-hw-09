@@ -16,14 +16,9 @@ function createPromise(position, delay) {
       }
       // Reject
       reject(`❌ Rejected promise ${position} in ${delay}ms`);
-    }, promiseMs);
+    }, delay);
   });
 }
-
-let delayMs = 0;
-let stepMs = 0;
-let amountEl = 0;
-let promiseMs = delayMs;
 
 refs.formEl.addEventListener('submit', onPromisFn);
 
@@ -33,13 +28,10 @@ function onPromisFn(ev) {
     elements: { delay, step, amount },
   } = ev.currentTarget;
 
-  delayMs = Number(delay.value);
-  stepMs = Number(step.value);
-  amountEl = Number(amount.value);
+  let promiseMs = Number(delay.value);
 
-  for (let el = 0; el < amountEl; el += 1) {
+  for (let el = 0; el < Number(amount.value); el += 1) {
     let turnPos = el + 1;
-    promiseMs += stepMs;
 
     createPromise(turnPos, promiseMs)
       .then(res => {
@@ -48,5 +40,6 @@ function onPromisFn(ev) {
       .catch(error => {
         Notiflix.Notify.failure(error);
       });
+    promiseMs += Number(step.value);
   }
 }

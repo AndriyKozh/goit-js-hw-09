@@ -16,7 +16,6 @@ const refs = {
 
 const dateEl = new Date();
 const dateElNumb = dateEl.getTime();
-let timerId = null;
 
 const options = {
   enableTime: true,
@@ -35,6 +34,7 @@ const options = {
     }
 
     refs.button.addEventListener('click', () => {
+      let timerId = null;
       timerId = setInterval(() => {
         const currentTime = Date.now();
         const deltaTime = selectTimes - currentTime;
