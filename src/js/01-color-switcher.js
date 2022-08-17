@@ -15,11 +15,21 @@ refs.stop.addEventListener('click', onClickStop);
 function colorRandom() {
   refs.body.style.backgroundColor = getRandomHexColor();
 }
+// refs.start.getAttribute('disabled', true);
+// refs.stop.setAttribute('disabled', true);
 
 function onClickStart() {
   timerId = setInterval(colorRandom, 2000);
+  if (refs.start) {
+    refs.start.disabled = true;
+    refs.stop.disabled = false;
+  }
 }
 
 function onClickStop() {
+  if (refs.stop) {
+    refs.start.disabled = false;
+    refs.stop.disabled = true;
+  }
   clearInterval(timerId);
 }
